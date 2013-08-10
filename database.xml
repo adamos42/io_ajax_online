@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+    <name>Ajax Online Visitor counter database</name>
+    <version>0.1</version>
+    <license>GPLv3</license>
+    <tables>
+    
+        <query>
+            CREATE TABLE IF NOT EXISTS module_online (
+                `id_visit` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+                `ip_address` VARCHAR(255) NOT NULL,
+                `user_agent` TEXT NOT NULL,
+                `datetime` DATETIME DEFAULT CURRENT_TIMESTAMP,
+                PRIMARY KEY (`id_visit`)
+            )
+            ENGINE = InnoDB
+            AUTO_INCREMENT = 1
+            DEFAULT CHARACTER SET = utf8
+            COLLATE = utf8_unicode_ci;
+        </query>
+        
+    </tables>
+    
+</sql>
