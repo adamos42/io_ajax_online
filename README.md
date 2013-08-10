@@ -4,13 +4,15 @@ Ajax_online module
 Ajax online visitors counter module for Ionize 1.x.x, This module store visitor datas from last 10 minute and with ajax
 you can get the last 5 minute visitors number. The module automatic delete the more than 10 minute datas.
 
-Require
-==============
+#### Author
+
+- Adam Liszkai / adamos42
+
+#### Require
 - Ionize > 1.x.x
 - jQuery
 
-Usage & Example:
-==============
+#### Usage & Example:
 
 ```html
 <script type="text/javascript">
