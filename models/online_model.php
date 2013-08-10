@@ -27,7 +27,7 @@ class online_model extends CI_Model {
    
    public function getLattestVisits() {
    
-      $this->db->query("DELETE FROM module_online WHERE datetime > (NOW() - INTERVAL 10 MINUTE)");
+      $this->db->query("DELETE FROM module_online WHERE datetime < (NOW() - INTERVAL 10 MINUTE)");
       
       $this->db->select("
          datetime,
@@ -36,7 +36,7 @@ class online_model extends CI_Model {
          COUNT(*) AS visits      
       
       ")->from("module_online");
-      $this->db->where("datetime <", "(NOW() - INTERVAL 5 MINUTE)");
+      $this->db->where("datetime <", "date_sub(now(), interval 5 minute) ;");
       $this->db->group_by('session_id');
    
       return $this->db->get();

@@ -16,11 +16,7 @@ class Ajax_online extends My_Controller
     
     function get() {
         
-        $query = $this->online_model->getLattestVisits();        
-        
-        //echo "<pre>";
-        //print_r($query->result());
-        //echo "</pre>";
+        $query = $this->online_model->getLattestVisits();
     
         return $query->num_rows();
     
