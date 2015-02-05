@@ -1,8 +1,7 @@
-Ajax_online module
+Ionize Online visitors module
 ==============
 
-Ajax online visitors counter module for Ionize 1.x.x, This module store visitor datas from last 10 minute and with ajax
-you can get the last 5 minute visitors number. The module automatic delete the more than 10 minute datas.
+Ajax online visitors counter module for Ionize 1.x.x, This module store visitor datas from last 10 minute and with ajax can be get the last 5 minute visitors number. The module automatic delete the more than 10 minute datas.
 
 #### Author
 
@@ -16,35 +15,50 @@ you can get the last 5 minute visitors number. The module automatic delete the m
 
 ```html
 <script type="text/javascript">
-$(function() {
+var Visitors = new (function()
+{
+   var $this = {}; // Create object to containt methods and variables
    
-   get_visits();
+   // Set the visitors status container html element
+   $this.visitors_container = $("#online-users");
    
-   var online_interval = setInterval(function() {
+   // Create the interval variable
+   $this.online_interval = null;
    
-      get_visits();
-   
-   }, 5000);
-
-   function get_visits() {
+   // Declare the refresh method
+   $public.refresh = function()
+   {
+      console.log("Visitors.refresh() executed");
    
       $.ajax({
-         url: "/ajax_online/visit",
-         success: function(data) {
-            
+         url: "<ion:base_url />ajax_online/visit",
+         success: function(data)
+         {
             var json = $.parseJSON(data);
+            console.debug("Visitors.refresh: ajax request was successfull", json);
             
-            if(json.success) {
-            
-               $("#online-users").html( json.visits );
-            
+            if(json.success) // If the module was successfull
+            {
+               console.debug("Visitors.refresh: replace the visitors container content");
+               // Replace the visitos status html element content
+               $public.visitors_container.html( json.visits );
             }
-            
          }
       });
-   
    }
-
+   
+   console.debug("Visitors: set the interval to keep up to date the module");
+   $this.online_interval = setInterval(function()
+   {
+      Visitors.refresh();
+   },
+   5000);
+   
+   console.debug("Visitors: Refresh the visitors data");
+   $this.refresh();
+   
+   console.log("Visitors: Module JavaScript object created successfull");
+   return $this; // Return the $this object to the variable
 });
 </script>
 ```
