@@ -19,6 +19,9 @@ var Visitors = new (function()
 {
    var $this = {}; // Create object to containt methods and variables
    
+   // Check the jQuery exists if not then return the alert
+   if(typeof jQuery == "undefined") return alert("jQuery is required for Ajax visitors module!");
+   
    // Set the visitors status container html element
    $this.visitors_container = $("#online-users");
    
@@ -30,9 +33,9 @@ var Visitors = new (function()
    {
       console.log("Visitors.refresh() executed");
    
-      $.ajax({
+      jQuery.ajax({
          url: "<ion:base_url />ajax_online/visit",
-         success: function(data)
+         success: function(data, textStatus, jqXHR)
          {
             var json = $.parseJSON(data);
             console.debug("Visitors.refresh: ajax request was successfull", json);
@@ -40,7 +43,6 @@ var Visitors = new (function()
             if(json.success) // If the module was successfull
             {
                console.debug("Visitors.refresh: replace the visitors container content");
-               // Replace the visitos status html element content
                $public.visitors_container.html( json.visits );
             }
          }
